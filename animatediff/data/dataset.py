@@ -3,10 +3,14 @@ import numpy as np
 from einops import rearrange
 from decord import VideoReader
 
+from gif_reader import GifReader
+
 import torch
 import torchvision.transforms as transforms
 from torch.utils.data.dataset import Dataset
 from animatediff.utils.util import zero_rank_print
+
+
 
 
 
@@ -39,9 +43,17 @@ class WebVid10M(Dataset):
     def get_batch(self, idx):
         video_dict = self.dataset[idx]
         videoid, name, page_dir = video_dict['videoid'], video_dict['name'], video_dict['page_dir']
-        
-        video_dir    = os.path.join(self.video_folder, f"{videoid}.mp4")
-        video_reader = VideoReader(video_dir)
+
+        file_ext = 'mp4'
+        if 'file_ext' in video_dict:
+            file_ext = video_dict['file_ext']
+
+        if file_ext == 'mp4':
+            video_dir    = os.path.join(self.video_folder,  f"{videoid}.mp4")
+            video_reader = VideoReader(video_dir)
+        else:
+            video_dir    = os.path.join(self.video_folder, page_dir, f"{videoid}.{file_ext}")
+            video_reader = GifReader(video_dir)
         video_length = len(video_reader)
         
         if not self.is_image:
@@ -51,7 +63,10 @@ class WebVid10M(Dataset):
         else:
             batch_index = [random.randint(0, video_length - 1)]
 
-        pixel_values = torch.from_numpy(video_reader.get_batch(batch_index).asnumpy()).permute(0, 3, 1, 2).contiguous()
+        if file_ext == 'mp4':
+            pixel_values = torch.from_numpy(video_reader.get_batch(batch_index).asnumpy()).permute(0, 3, 1, 2).contiguous()
+        else:
+            pixel_values = torch.from_numpy(video_reader.get_batch(batch_index)).permute(0, 3, 1, 2).contiguous()
         pixel_values = pixel_values / 255.
         del video_reader
 
