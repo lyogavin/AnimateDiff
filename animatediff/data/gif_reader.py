@@ -11,7 +11,7 @@ def load_frames(image: Image, mode='RGBA'):
 
 
 
-class GifReader():
+class GifReader:
     def __iter__(self, gif_path):
         self.gif_path = gif_path
 
