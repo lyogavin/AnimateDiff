@@ -107,11 +107,12 @@ if __name__ == "__main__":
         sample_stride=4, sample_n_frames=16,
         is_image=True,
     )
-    import pdb
-    pdb.set_trace()
+
     
     dataloader = torch.utils.data.DataLoader(dataset, batch_size=4, num_workers=16,)
     for idx, batch in enumerate(dataloader):
         print(batch["pixel_values"].shape, len(batch["text"]))
         # for i in range(batch["pixel_values"].shape[0]):
         #     save_videos_grid(batch["pixel_values"][i:i+1].permute(0,2,1,3,4), os.path.join(".", f"{idx}-{i}.mp4"), rescale=True)
+    import pdb
+    pdb.set_trace()
