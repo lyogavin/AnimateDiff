@@ -490,4 +490,6 @@ if __name__ == "__main__":
     name   = Path(args.config).stem
     config = OmegaConf.load(args.config)
 
+    print(f"training config: {config}")
+
     main(name=name, launcher=args.launcher, use_wandb=args.wandb, **config)
