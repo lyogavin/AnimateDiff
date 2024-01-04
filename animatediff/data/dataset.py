@@ -3,6 +3,9 @@ import numpy as np
 from einops import rearrange
 from decord import VideoReader
 
+if __name__ == "__main__":
+    import sys
+    sys.path.append('../../')
 from animatediff.data.gif_reader import GifReader
 
 import torch
