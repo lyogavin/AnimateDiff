@@ -123,7 +123,7 @@ def main(
     global_seed: int = 42,
     is_debug: bool = False,
 
-    max_tokens: int =-1,
+    max_len: int =-1,
 ):
     check_min_version("0.10.0.dev0")
 
@@ -170,7 +170,6 @@ def main(
     tokenizer    = CLIPTokenizer.from_pretrained(pretrained_model_path, subfolder="tokenizer")
     text_encoder = CLIPTextModel.from_pretrained(pretrained_model_path, subfolder="text_encoder")
 
-    max_len = max_tokens
     if max_len == -1:
         max_len = tokenizer.model_max_length
     print(f"using max tokens: {max_len}")
