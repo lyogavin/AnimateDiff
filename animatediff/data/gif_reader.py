@@ -17,9 +17,11 @@ class GifReader():
 
         with Image.open(self.gif_path) as im:
             self.frames = load_frames(im)
+            print(f"loaded {self.gif_path} to frames: {self.frames.shape}")
 
     def __len__(self):
         return self.frames.shape[0]
 
     def get_batch(self, indices):
+        print(f"get_batch: {indices}")
         return self.frames.shape[indices, :, :, :]
