@@ -1,0 +1,1 @@
+nohup torchrun --nnodes=1 --nproc_per_node=1 train.py --config configs/training/v1/sprite_sheet_training.yaml --wandb &
