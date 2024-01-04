@@ -28,8 +28,8 @@ noise_scheduler_kwargs:
   clip_sample:         false
 
 train_data:
-  csv_path:        "/home/ubuntu/animated_diff_ds_1704397657.csv"
-  video_folder:    "/home/ubuntu/"
+  csv_path:        "data/animated_diff_ds_1704397657.csv"
+  video_folder:    "data/"
   sample_size:     256
   sample_stride:   4
   sample_n_frames: 16
