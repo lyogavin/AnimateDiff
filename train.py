@@ -176,6 +176,7 @@ def main(
         unet = UNet2DConditionModel.from_pretrained(pretrained_model_path, subfolder="unet")
         
     # Load pretrained unet weights
+    print(f"unet_checkpoint_path: {unet_checkpoint_path}")
     if unet_checkpoint_path != "":
         zero_rank_print(f"from checkpoint: {unet_checkpoint_path}")
         unet_checkpoint_path = torch.load(unet_checkpoint_path, map_location="cpu")
