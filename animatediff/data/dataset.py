@@ -3,7 +3,7 @@ import numpy as np
 from einops import rearrange
 from decord import VideoReader
 
-from gif_reader import GifReader
+from animatediff.data.gif_reader import GifReader
 
 import torch
 import torchvision.transforms as transforms
