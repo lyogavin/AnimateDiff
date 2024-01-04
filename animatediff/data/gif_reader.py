@@ -27,4 +27,4 @@ class GifReader:
     def get_batch(self, indices):
         print(f"get_batch: {indices}")
 
-        return self.frames.shape[np.array(indices), :, :, :]
+        return self.frames[indices, :, :, :]
