@@ -485,11 +485,17 @@ if __name__ == "__main__":
     parser.add_argument("--config",   type=str, required=True)
     parser.add_argument("--launcher", type=str, choices=["pytorch", "slurm"], default="pytorch")
     parser.add_argument("--wandb",    action="store_true")
+    parser.add_argument("--output_dir",   type=str, required=False)
     args = parser.parse_args()
 
     name   = Path(args.config).stem
     config = OmegaConf.load(args.config)
 
+    if args.output_dir is not None:
+        config['output_dir'] = args.output_dir
+
     print(f"training config: {config}")
+
+
 
     main(name=name, launcher=args.launcher, use_wandb=args.wandb, **config)

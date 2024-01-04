@@ -45,7 +45,7 @@ validation_data:
 trainable_modules:
   - "motion_modules."
 
-unet_checkpoint_path: ""
+unet_checkpoint_path: "models/Motion_Module/mm_sd_v14.ckpt"
 
 learning_rate:    1.e-4
 train_batch_size: 4
