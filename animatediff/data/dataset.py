@@ -105,7 +105,7 @@ if __name__ == "__main__":
         video_folder="/home/ubuntu/",
         sample_size=256,
         sample_stride=4, sample_n_frames=16,
-        is_image=True,
+        is_image=False,
     )
 
     
