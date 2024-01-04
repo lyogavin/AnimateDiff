@@ -97,8 +97,8 @@ if __name__ == "__main__":
     from animatediff.utils.util import save_videos_grid
 
     dataset = WebVid10M(
-        csv_path="/mnt/petrelfs/guoyuwei/projects/datasets/webvid/results_2M_val.csv",
-        video_folder="/mnt/petrelfs/guoyuwei/projects/datasets/webvid/2M_val",
+        csv_path="/home/ubuntu/animated_diff_ds.csv",
+        video_folder="/home/ubuntu/",
         sample_size=256,
         sample_stride=4, sample_n_frames=16,
         is_image=True,

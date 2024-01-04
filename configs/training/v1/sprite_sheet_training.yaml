@@ -1,7 +1,7 @@
 image_finetune: false
 
 output_dir: "outputs"
-pretrained_model_path: "models/StableDiffusion/stable-diffusion-v1-5"
+pretrained_model_path: "models/StableDiffusion"
 
 unet_additional_kwargs:
   use_motion_module              : true
@@ -28,8 +28,8 @@ noise_scheduler_kwargs:
   clip_sample:         false
 
 train_data:
-  csv_path:        "/content/animated_diff_ds.csv"
-  video_folder:    "/content/"
+  csv_path:        "/home/ubuntu/animated_diff_ds.csv"
+  video_folder:    "/home/ubuntu/"
   sample_size:     256
   sample_stride:   4
   sample_n_frames: 16
