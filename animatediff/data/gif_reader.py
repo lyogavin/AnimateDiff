@@ -1,7 +1,7 @@
 from PIL import Image, ImageSequence
 import numpy as np
 
-def load_frames(image: Image, mode='RGBA'):
+def load_frames(image: Image, mode='RGB'):
     return np.array([
         np.array(frame.convert(mode))
         for frame in ImageSequence.Iterator(image)
