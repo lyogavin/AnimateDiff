@@ -137,6 +137,7 @@ def main(
     # Logging folder
     folder_name = "debug" if is_debug else name + datetime.datetime.now().strftime("-%Y-%m-%dT%H-%M-%S")
     output_dir = os.path.join(output_dir, folder_name)
+    print(f"using output_dir: {output_dir}")
     if is_debug and os.path.exists(output_dir):
         os.system(f"rm -rf {output_dir}")
 

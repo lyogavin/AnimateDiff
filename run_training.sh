@@ -11,7 +11,7 @@ echo "START TIME: $(date)"
 echo 'log to'
 
 echo training_log_$run_id.log
-OUTPUT_PATH=$ROOT_DIR_BASE/output_$run_id
+OUTPUT_PATH=output_$run_id
 
 
 
