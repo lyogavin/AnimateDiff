@@ -49,6 +49,8 @@ trainable_modules:
   - "motion_modules."
 
 unet_checkpoint_path: "models/Motion_Module/mm_sd_v15_v2.ckpt"
+dreambooth_path: "models/DreamBooth_LoRA/realisticVisionV60B1_v51VAE.safetensors"
+
 
 learning_rate:    1.e-4
 train_batch_size: 4

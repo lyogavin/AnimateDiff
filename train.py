@@ -38,6 +38,7 @@ from animatediff.data.dataset import WebVid10M
 from animatediff.models.unet import UNet3DConditionModel
 from animatediff.pipelines.pipeline_animation import AnimationPipeline
 from animatediff.utils.util import save_videos_grid, zero_rank_print
+from animatediff.utils.convert_from_ckpt import convert_ldm_unet_checkpoint, convert_ldm_clip_checkpoint, convert_ldm_vae_checkpoint
 
 
 
@@ -90,6 +91,7 @@ def main(
     cfg_random_null_text_ratio: float = 0.1,
     
     unet_checkpoint_path: str = "",
+    dreambooth_path: str ="",
     unet_additional_kwargs: Dict = {},
     ema_decay: float = 0.9999,
     noise_scheduler_kwargs = None,
@@ -195,8 +197,33 @@ def main(
 
         m, u = unet.load_state_dict(state_dict, strict=False)
         zero_rank_print(f"missing keys: {len(m)}, unexpected keys: {len(u)}, total keys: {len(state_dict.keys())}")
-        zero_rank_print(f"missing keys: {m}, unexpected keys: {u}")
+        #zero_rank_print(f"missing keys: {m}, unexpected keys: {u}")
         assert len(u) == 0
+
+    # load dream booth
+    print(f"dreambooth_path: {dreambooth_path}")
+    if dreambooth_path != "":
+        print(f"load dreambooth model from {dreambooth_path}")
+        if dreambooth_path.endswith(".safetensors"):
+            dreambooth_state_dict = {}
+            with safe_open(dreambooth_path, framework="pt", device="cpu") as f:
+                for key in f.keys():
+                    dreambooth_state_dict[key] = f.get_tensor(key)
+        elif dreambooth_path.endswith(".ckpt"):
+            dreambooth_state_dict = torch.load(dreambooth_path, map_location="cpu")
+
+        # 1. vae
+        converted_vae_checkpoint = convert_ldm_vae_checkpoint(dreambooth_state_dict, vae.config)
+        m, u = vae.load_state_dict(converted_vae_checkpoint)
+        zero_rank_print(f"missing keys: {len(m)}, unexpected keys: {len(u)}, total keys: {len(converted_vae_checkpoint.keys())}")
+        # 2. unet
+        converted_unet_checkpoint = convert_ldm_unet_checkpoint(dreambooth_state_dict, unet.config)
+        m,u = unet.load_state_dict(converted_unet_checkpoint, strict=False)
+        zero_rank_print(f"missing keys: {len(m)}, unexpected keys: {len(u)}, total keys: {len(converted_unet_checkpoint.keys())}")
+        # 3. text_model
+        text_encoder = convert_ldm_clip_checkpoint(dreambooth_state_dict)
+        zero_rank_print(f"newly loaded text_encoder: {text_encoder}")
+        del dreambooth_state_dict
         
     # Freeze vae and text_encoder
     vae.requires_grad_(False)
