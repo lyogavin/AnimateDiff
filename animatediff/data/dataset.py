@@ -88,6 +88,7 @@ class WebVid10M(Dataset):
                 break
 
             except Exception as e:
+                print(f"error loading {idx}: {e}")
                 idx = random.randint(0, self.length-1)
 
         pixel_values = self.pixel_transforms(pixel_values)
