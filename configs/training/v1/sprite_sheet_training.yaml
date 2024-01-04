@@ -28,7 +28,7 @@ noise_scheduler_kwargs:
   clip_sample:         false
 
 train_data:
-  csv_path:        "/home/ubuntu/animated_diff_ds.csv"
+  csv_path:        "/home/ubuntu/animated_diff_ds_1704397657.csv"
   video_folder:    "/home/ubuntu/"
   sample_size:     256
   sample_stride:   4
@@ -64,6 +64,5 @@ enable_xformers_memory_efficient_attention: True
 
 is_debug: False
 
-max_len: 262
 
 
