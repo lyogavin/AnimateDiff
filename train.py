@@ -179,14 +179,12 @@ def main(
     print(f"unet_checkpoint_path: {unet_checkpoint_path}")
     if unet_checkpoint_path != "":
         zero_rank_print(f"from checkpoint: {unet_checkpoint_path}")
-        print(f"from checkpoint: {unet_checkpoint_path}")
         unet_checkpoint_path = torch.load(unet_checkpoint_path, map_location="cpu")
         if "global_step" in unet_checkpoint_path: zero_rank_print(f"global_step: {unet_checkpoint_path['global_step']}")
         state_dict = unet_checkpoint_path["state_dict"] if "state_dict" in unet_checkpoint_path else unet_checkpoint_path
 
         m, u = unet.load_state_dict(state_dict, strict=False)
-        zero_rank_print(f"missing keys: {len(m)}, unexpected keys: {len(u)}")
-        print(f"missing keys: {len(m)}, unexpected keys: {len(u)}")
+        zero_rank_print(f"missing keys: {len(m)}, unexpected keys: {len(u)}, total keys: {len(state_dict.keys())}")
         assert len(u) == 0
         
     # Freeze vae and text_encoder
