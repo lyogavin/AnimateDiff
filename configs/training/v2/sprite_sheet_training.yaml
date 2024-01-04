@@ -34,7 +34,7 @@ train_data:
   csv_path:        "data/animated_diff_ds_1704397657.csv"
   video_folder:    "data/"
   sample_size:     256
-  sample_stride:   4
+  sample_stride:   1
   sample_n_frames: 16
 
 validation_data:
