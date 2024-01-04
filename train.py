@@ -167,6 +167,8 @@ def main(
     vae          = AutoencoderKL.from_pretrained(pretrained_model_path, subfolder="vae")
     tokenizer    = CLIPTokenizer.from_pretrained(pretrained_model_path, subfolder="tokenizer")
     text_encoder = CLIPTextModel.from_pretrained(pretrained_model_path, subfolder="text_encoder")
+
+    print(f"using max tokens: {tokenizer.model_max_length}")
     if not image_finetune:
         unet = UNet3DConditionModel.from_pretrained_2d(
             pretrained_model_path, subfolder="unet", 
