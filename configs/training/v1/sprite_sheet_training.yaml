@@ -62,4 +62,4 @@ global_seed: 42
 mixed_precision_training: true
 enable_xformers_memory_efficient_attention: True
 
-is_debug: True
+is_debug: False
