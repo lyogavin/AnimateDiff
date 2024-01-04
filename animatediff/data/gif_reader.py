@@ -27,4 +27,7 @@ class GifReader:
     def get_batch(self, indices):
         print(f"get_batch: {indices}")
 
-        return self.frames[indices, :, :, :]
+        to_return  = self.frames[indices, :, :, :]
+
+        print(f"returning: {to_return.shape}")
+        return to_return
