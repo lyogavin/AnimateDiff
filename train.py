@@ -122,6 +122,8 @@ def main(
 
     global_seed: int = 42,
     is_debug: bool = False,
+
+    max_tokens: int =-1,
 ):
     check_min_version("0.10.0.dev0")
 
@@ -168,7 +170,10 @@ def main(
     tokenizer    = CLIPTokenizer.from_pretrained(pretrained_model_path, subfolder="tokenizer")
     text_encoder = CLIPTextModel.from_pretrained(pretrained_model_path, subfolder="text_encoder")
 
-    print(f"using max tokens: {tokenizer.model_max_length}")
+    max_len = max_tokens
+    if max_len == -1:
+        max_len = tokenizer.model_max_length
+    print(f"using max tokens: {max_len}")
     if not image_finetune:
         unet = UNet3DConditionModel.from_pretrained_2d(
             pretrained_model_path, subfolder="unet", 
@@ -365,7 +370,7 @@ def main(
             # Get the text embedding for conditioning
             with torch.no_grad():
                 prompt_ids = tokenizer(
-                    batch['text'], max_length=tokenizer.model_max_length, padding="max_length", truncation=True, return_tensors="pt"
+                    batch['text'], max_length=max_len,  padding="max_length", truncation=True, return_tensors="pt"
                 ).input_ids.to(latents.device)
                 encoder_hidden_states = text_encoder(prompt_ids)[0]
                 

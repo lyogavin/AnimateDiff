@@ -63,3 +63,5 @@ mixed_precision_training: true
 enable_xformers_memory_efficient_attention: True
 
 is_debug: False
+
+max_len: 262
