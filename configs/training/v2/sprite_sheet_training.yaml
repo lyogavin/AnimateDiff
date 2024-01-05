@@ -34,7 +34,7 @@ train_data:
   csv_path:        "data/animated_diff_ds_1704397657.csv"
   video_folder:    "data/"
   sample_size:     256
-  sample_stride:   1
+  sample_stride:   4
   sample_n_frames: 16
 
 validation_data:
@@ -52,11 +52,11 @@ unet_checkpoint_path: "models/Motion_Module/mm_sd_v15_v2.ckpt"
 dreambooth_path: "models/DreamBooth_LoRA/realisticVisionV60B1_v51VAE.safetensors"
 
 
-learning_rate:    1.e-5
+learning_rate:    1.e-4
 train_batch_size: 4
 
 max_train_epoch:      -1
-max_train_steps:      1000
+max_train_steps:      10000
 checkpointing_epochs: -1
 checkpointing_steps:  5000
 
