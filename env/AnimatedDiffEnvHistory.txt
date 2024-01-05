@@ -1,0 +1,170 @@
+    1  sudo systemctl restart cloudflared.service
+    2  git clone https://github.com/lyogavin/AnimateDiff.git
+    3  cd AnimateDiff/
+    4  ls
+    5  conda env create -f environment.yaml
+    6  cd
+    7  wget https://repo.anaconda.com/miniconda/Miniconda3-py38_4.12.0-Linux-x86_64.sh
+    8  bash ./Miniconda3-py38_4.12.0-Linux-x86_64.sh 
+    9  conda env create -f environment.yaml
+   10  cd AnimateDiff/
+   11  ls
+   12  conda env create -f environment.yaml
+   13  conda activate animatediff
+   14  ls
+   15  torchrun --nnodes=1 --nproc_per_node=1 train.py --config configs/training/v1/sprite_sheet_training.yaml 
+   16  cd models/
+   17  ls
+   18  cd StableDiffusion/
+   19  ls
+   20  rm ./Put\ diffusers\ stable-diffusion-v1-5\ repo\ here.txt 
+   21  cd ..
+   22  rmdir StableDiffusion/
+   23  cd ..
+   24  git lfs install
+   25  git clone https://huggingface.co/runwayml/stable-diffusion-v1-5 models/StableDiffusion/
+   26  git lfs install
+   27  sudo apt-get install git-lfs
+   28  git lfs install
+   29  ls
+   30  cd models/
+   31  ls
+   32  rm -rf ./StableDiffusion
+   33  cd .
+   34  cd ..
+   35  git clone https://huggingface.co/runwayml/stable-diffusion-v1-5 models/StableDiffusion/
+   36  bash download_bashscripts/0-MotionModule.sh
+   37  torchrun --nnodes=1 --nproc_per_node=1 train.py --config configs/training/v1/sprite_sheet_training.yaml 
+   38  ls models/StableDiffusion/stable-diffusion-v1-5
+   39  ls models/StableDiffusion/
+   40  vim ./configs/training/v1/sprite_sheet_training.yaml 
+   41  torchrun --nnodes=1 --nproc_per_node=1 train.py --config configs/training/v1/sprite_sheet_training.yaml 
+   42  vim ./configs/training/v1/sprite_sheet_training.yaml 
+   43  pip install -U torch
+   44  pip install accelerate
+   45  accelerate 
+   46  accelerate  config
+   47  torchrun --nnodes=1 --nproc_per_node=1 train.py --config configs/training/v1/sprite_sheet_training.yaml 
+   48  pip install sympy
+   49  torchrun --nnodes=1 --nproc_per_node=1 train.py --config configs/training/v1/sprite_sheet_training.yaml 
+   50  pip install sympy
+   51  pip install --upgrade
+   52  pip install sympy 
+   53  python
+   54  source ~/.bashrc
+   55  cd
+   56  conda activate animatediff
+   57  python
+   58  conda install sympy
+   59  python
+   60  torchrun --nnodes=1 --nproc_per_node=1 train.py --config configs/training/v1/sprite_sheet_training.yaml 
+   61  ls
+   62  cd AnimateDiff/
+   63  torchrun --nnodes=1 --nproc_per_node=1 train.py --config configs/training/v1/sprite_sheet_training.yaml 
+   64  pip intall wandb
+   65  pip install wandb
+   66  torchrun --nnodes=1 --nproc_per_node=1 train.py --config configs/training/v1/sprite_sheet_training.yaml 
+   67  pip install einops
+   68  torchrun --nnodes=1 --nproc_per_node=1 train.py --config configs/training/v1/sprite_sheet_training.yaml 
+   69  cd AnimateDiff/
+   70  ls
+   71  cat ./environment.yaml 
+   72  pip install diffusers==0.11.1 transformers==4.25.1 xformers==0.0.16 imageio==2.27.0 decord==0.6.0 gdown einops omegaconf safetensors gradio wandb
+   73  pip list | grep torch
+   74  pip install diffusers==0.11.1 transformers==4.25.1 xformers imageio==2.27.0 decord==0.6.0 gdown einops omegaconf safetensors gradio wandb
+   75  torchrun --nnodes=1 --nproc_per_node=1 train.py --config configs/training/v1/sprite_sheet_training.yaml 
+   76  vim ./configs/training/v1/sprite_sheet_training.yaml 
+   77  git status
+   78  git pull
+   79  git status
+   80  git restore  configs/training/v1/sprite_sheet_training.yaml
+   81  git restore models/StableDiffusion/Put diffusers stable-diffusion-v1-5 repo here.txt
+   82  vim  configs/training/v1/sprite_sheet_training.yaml
+   83  cd animatediff/data/
+   84  ls
+   85  python ./dataset.py 
+   86  pip install nupy
+   87  pip install numpy
+   88  vim ./dataset.py 
+   89  python ./dataset.py 
+   90  conda install numpy
+   91  python ./dataset.py 
+   92  pip install diffusers==0.11.1 transformers==4.25.1 xformers imageio==2.27.0 decord==0.6.0 gdown einops omegaconf safetensors gradio wandb
+   93  python ./dataset.py 
+   94  pip install diffusers==0.11.1 transformers==4.25.1 xformers imageio==2.27.0 decord==0.6.0 gdown einops omegaconf safetensors gradio wandbpip install --upgrade pip
+   95  pip install --upgrade pip
+   96  pip install diffusers==0.11.1 transformers==4.25.1 xformers imageio==2.27.0 decord==0.6.0 gdown einops omegaconf safetensors gradio wandbpip install --upgrade pip
+   97  pip install diffusers==0.11.1 transformers==4.25.1 xformers imageio==2.27.0 decord==0.6.0 gdown einops omegaconf safetensors gradio wandb
+   98  python ./dataset.py 
+   99  python3 ./dataset.py 
+  100  vim ./dataset.py 
+  101  python3 ./dataset.py 
+  102  nvidia-smi -l 1
+  103  top
+  104  ls
+  105  unzip ./sprite_sheet.zip 
+  106  ls
+  107  pwd
+  108  wandb login
+  109  nvidia-smi -l 1
+  110  top
+  111  nvidia-smi -l 1
+  112  top
+  113  nvidia-smi -l 1
+  114  top
+  115  nvidia-smi -l 1
+  116  top
+  117  nvidia-smi -l 1
+  118  cd AnimateDiff/
+  119  ls outputs/debug/samples/sample-2.gif
+  120  pwd
+  121  nvidia-smi -l 1
+  122  ls outputs/debug/samples/
+  123  ls
+  124  tail -f ./training_log_1704387045.log
+  125  cd models/
+  126  ls
+  127  cd Motion_Module/
+  128  ls
+  129  ls -lht
+  130  ls
+  131  cd ../../
+  132  ls
+  133  cd models/
+  134  ls
+  135  cd StableDiffusion/
+  136  ls
+  137  cd tokenizer/
+  138  ls
+  139  vim ./tokenizer_config.json 
+  140  cd ..
+  141  ls
+  142  vim ./v1-inference.yaml 
+  143  ls
+  144  cd unet/
+  145  ls
+  146  vim config.json 
+  147  cd ..ls
+  148  cd ..
+  149  ls
+  150  vim ./v1-inference.yaml 
+  151  head -n 1 /home/ubuntu/animated_diff_ds.csv
+  152  ls
+  153  cd ..
+  154  ls
+  155  cd Motion
+  156  cd Motion_Module/
+  157  ls
+  158  wget https://huggingface.co/guoyww/animatediff/blob/main/mm_sd_v15_v2.ckpt
+  159  ls
+  160  rm ./mm_sd_v15_v2.ckpt 
+  161  wget https://huggingface.co/guoyww/animatediff/resolve/main/mm_sd_v15_v2.ckpt?download=true
+  162  ls
+  163  mv ./mm_sd_v15_v2.ckpt\?download\=true ./mm_sd_v15_v2.ckpt
+  164  ls
+  165  python
+  166  cd
+  167  history | vim -
+  168  history > AnimatedDiffEnvHistory
+  169  vim Animate
+  170  history > ./AnimatedDiffEnvHistory.txt
