@@ -56,9 +56,9 @@ learning_rate:    1.e-4
 train_batch_size: 4
 
 max_train_epoch:      -1
-max_train_steps:      1000
+max_train_steps:      10000
 checkpointing_epochs: -1
-checkpointing_steps:  200
+checkpointing_steps:  1000
 
 validation_steps:       100
 validation_steps_tuple: [2, 50]
