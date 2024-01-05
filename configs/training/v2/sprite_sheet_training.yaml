@@ -31,7 +31,7 @@ noise_scheduler_kwargs:
   clip_sample:         false
 
 train_data:
-  csv_path:        "data/animated_diff_ds_1704397657.csv"
+  csv_path:        "data/animated_diff_ds_1704429483_refined_prompts.csv"
   video_folder:    "data/"
   sample_size:     256
   sample_stride:   4
@@ -39,8 +39,8 @@ train_data:
 
 validation_data:
   prompts:
-    - "A sprite sheet animation of green color bullet effect from bottom of the screen to the top."
-    - "A sprite sheet animation of a fire with smokes around it."
+    - "Energetic sword slash effect, blue color, pixel art animation, 8-bit style, inspired by 16-bit era RPGs games, straight-on camera, action shot, with (shiny metallic texture:1.3) and (glowing edge:1.25), solid black background."
+    - "A sprite sheet animation of a fire with smokes around it, realistic style, front view, close-up, HDR lighting (vivid colors:1.5) (dynamic motion:1.25) (high resolution:1.3) (neon lighting:1.4)."
 
   num_inference_steps: 25
   guidance_scale: 8.
