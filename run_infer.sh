@@ -1,0 +1,1 @@
+python -m scripts.animate --config configs/prompts/v2/v2-1-RealisticVision.yaml --pretrained-model-path models/StableDiffusion
