@@ -198,6 +198,10 @@ def main(
         m, u = unet.load_state_dict(state_dict, strict=False)
         zero_rank_print(f"missing keys: {len(m)}, unexpected keys: {len(u)}, total keys: {len(state_dict.keys())}")
         #zero_rank_print(f"missing keys: {m}, unexpected keys: {u}")
+        if len(u) > 0:
+            import pprint
+            print(f"unexpected keys: ")
+            pprint.pprint(u)
         assert len(u) == 0
 
     # load dream booth
