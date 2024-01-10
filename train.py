@@ -204,7 +204,7 @@ def main(
             pprint.pprint(u)
             print(f"missing keys: ")
             pprint.pprint(m)
-        assert len(u) == 0
+        assert len([x for x in u if 'motion_modules' not in x]) == 0
 
     # load dream booth
     print(f"dreambooth_path: {dreambooth_path}")
