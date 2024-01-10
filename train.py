@@ -89,8 +89,9 @@ def main(
     validation_data: Dict,
     cfg_random_null_text: bool = True,
     cfg_random_null_text_ratio: float = 0.1,
-    
+
     unet_checkpoint_path: str = "",
+    image_finetuned_unet_checkpoint_path: str = "",
     dreambooth_path: str ="",
     unet_additional_kwargs: Dict = {},
     ema_decay: float = 0.9999,
@@ -182,7 +183,23 @@ def main(
         )
     else:
         unet = UNet2DConditionModel.from_pretrained(pretrained_model_path, subfolder="unet")
-        
+
+    # Load image finetuned unet weights
+    print(f"image_finetuned_unet_checkpoint_path: {image_finetuned_unet_checkpoint_path}")
+    if image_finetuned_unet_checkpoint_path != "":
+        zero_rank_print(f"from checkpoint: {image_finetuned_unet_checkpoint_path}")
+        image_finetuned_unet_checkpoint = torch.load(image_finetuned_unet_checkpoint_path, map_location="cpu")
+        if "global_step" in image_finetuned_unet_checkpoint: zero_rank_print(
+            f"global_step: {image_finetuned_unet_checkpoint['global_step']}")
+        state_dict = image_finetuned_unet_checkpoint[
+            "state_dict"] if "state_dict" in image_finetuned_unet_checkpoint else image_finetuned_unet_checkpoint
+
+
+        m, u = unet.load_state_dict({k[len('module.'):] if k.startswith('module.') else k:v for k,v in state_dict.items()}, strict=False)
+        zero_rank_print(f"missing keys: {len(m)}, unexpected keys: {len(u)}, total keys: {len(state_dict.keys())}")
+        # zero_rank_print(f"missing keys: {m}, unexpected keys: {u}")
+        assert len(u) == 0
+
     # Load pretrained unet weights
     print(f"unet_checkpoint_path: {unet_checkpoint_path}")
     if unet_checkpoint_path != "":
