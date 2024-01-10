@@ -202,6 +202,8 @@ def main(
             import pprint
             print(f"unexpected keys: ")
             pprint.pprint(u)
+            print(f"missing keys: ")
+            pprint.pprint(m)
         assert len(u) == 0
 
     # load dream booth
