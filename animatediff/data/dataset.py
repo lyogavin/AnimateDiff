@@ -13,7 +13,30 @@ import torchvision.transforms as transforms
 from torch.utils.data.dataset import Dataset
 from animatediff.utils.util import zero_rank_print
 
+from torchvision.transforms import v2
 
+
+# import RandomIoUCrop
+# transforms = RandomIoUCrop()
+
+def tranform_image(img):
+    #w, h = img.size
+    w, h = img.shape[-2:]
+    if w == h:
+        pass
+    elif w > h:
+        transform = v2.Pad((0, int((w - h) / 2), 0, int((w - h) / 2)), padding_mode='edge')
+        img = transform(img)
+    else:
+        transform = v2.Pad((int((h - w) / 2), 0, int((h - w) / 2), 0), padding_mode='edge')
+        img = transform(img)
+
+    return img
+
+
+class SquarePad:
+    def __call__(self, image):
+        return tranform_image(image)
 
 
 
@@ -37,6 +60,7 @@ class WebVid10M(Dataset):
         
         sample_size = tuple(sample_size) if not isinstance(sample_size, int) else (sample_size, sample_size)
         self.pixel_transforms = transforms.Compose([
+            SquarePad(),
             transforms.RandomHorizontalFlip(),
             transforms.Resize(sample_size[0], antialias=True),
             transforms.CenterCrop(sample_size),

@@ -3,7 +3,7 @@ import numpy as np
 
 def load_frames(image: Image, mode='RGB'):
     return np.array([
-        np.array(frame.convert(mode))
+        np.array(frame.copy().convert(mode))
         for frame in ImageSequence.Iterator(image)
     ])
 
