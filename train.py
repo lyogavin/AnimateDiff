@@ -525,6 +525,11 @@ def main(
                     samples = torch.concat(samples)
                     save_path = f"{output_dir}/samples/sample-{global_step}.gif"
                     save_videos_grid(samples, save_path)
+
+                    # Wandb logging
+                    if is_main_process and (not is_debug) and use_wandb:
+                        wandb.log({"example":  wandb.Image(save_path)}, step=global_step)
+
                     
                 else:
                     samples = torch.stack(samples)
