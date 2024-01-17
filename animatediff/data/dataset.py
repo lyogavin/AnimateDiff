@@ -13,7 +13,7 @@ import torchvision.transforms as transforms
 from torch.utils.data.dataset import Dataset
 from animatediff.utils.util import zero_rank_print
 
-from torchvision.transforms import v2
+#from torchvision.transforms import v2
 
 from torchvision.transforms import functional as F
 
