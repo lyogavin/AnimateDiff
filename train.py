@@ -101,6 +101,7 @@ def main(
     max_train_steps: int = 100,
     validation_steps: int = 100,
     validation_steps_tuple: Tuple = (-1,),
+    checkpointing_steps_tuple: Tuple = (-1,),
 
     learning_rate: float = 3e-5,
     scale_lr: bool = False,
@@ -471,7 +472,7 @@ def main(
                 wandb.log({"train_loss": loss.item()}, step=global_step)
                 
             # Save checkpoint
-            if is_main_process and (global_step % checkpointing_steps == 0): # or step == len(train_dataloader) - 1):
+            if is_main_process and (global_step % checkpointing_steps == 0) or (global_step in checkpointing_steps_tuple): # or step == len(train_dataloader) - 1):
                 save_path = os.path.join(output_dir, f"checkpoints")
                 state_dict = {
                     "epoch": epoch,
@@ -535,6 +536,9 @@ def main(
                     samples = torch.stack(samples)
                     save_path = f"{output_dir}/samples/sample-{global_step}.png"
                     torchvision.utils.save_image(samples, save_path, nrow=4)
+                    # Wandb logging
+                    if is_main_process and (not is_debug) and use_wandb:
+                        wandb.log({"example":  wandb.Image(save_path)}, step=global_step)
 
                 logging.info(f"Saved samples to {save_path}")
                 
