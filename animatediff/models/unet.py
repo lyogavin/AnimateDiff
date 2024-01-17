@@ -477,14 +477,15 @@ class UNet3DConditionModel(ModelMixin, ConfigMixin):
 
     @classmethod
     def from_pretrained_2d(cls, pretrained_model_path, subfolder=None, unet_additional_kwargs=None):
+        repo_id = pretrained_model_path
         if subfolder is not None:
             pretrained_model_path = os.path.join(pretrained_model_path, subfolder)
 
 
         if not os.path.exists(pretrained_model_path):
             print(f"{pretrained_model_path} not a local path, download it from hf...")
-            pretrained_model_path = huggingface_hub.snapshot_download(pretrained_model_path,
-                                              #allow_patterns=os.path.basename(to_load),
+            pretrained_model_path = huggingface_hub.snapshot_download(repo_id,
+                                              allow_patterns=[f"*/{subfolder}/*", f"{subfolder}/*", f"/{subfolder}/*"],
                                               #token=hf_token
                                               )
             print(f"{pretrained_model_path} downloaded to {pretrained_model_path}.")
