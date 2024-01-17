@@ -25,6 +25,7 @@ from .unet_blocks import (
     get_up_block,
 )
 from .resnet import InflatedConv3d, InflatedGroupNorm
+import huggingface_hub
 
 
 logger = logging.get_logger(__name__)  # pylint: disable=invalid-name
@@ -478,6 +479,17 @@ class UNet3DConditionModel(ModelMixin, ConfigMixin):
     def from_pretrained_2d(cls, pretrained_model_path, subfolder=None, unet_additional_kwargs=None):
         if subfolder is not None:
             pretrained_model_path = os.path.join(pretrained_model_path, subfolder)
+
+
+        if not os.path.exists(pretrained_model_path):
+            print(f"{pretrained_model_path} not a local path, download it from hf...")
+            pretrained_model_path = huggingface_hub.snapshot_download(pretrained_model_path,
+                                              #allow_patterns=os.path.basename(to_load),
+                                              #token=hf_token
+                                              )
+            print(f"{pretrained_model_path} downloaded to {pretrained_model_path}.")
+
+
         print(f"loaded 3D unet's pretrained weights from {pretrained_model_path} ...")
 
         config_file = os.path.join(pretrained_model_path, 'config.json')
