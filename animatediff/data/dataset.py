@@ -15,6 +15,8 @@ from animatediff.utils.util import zero_rank_print
 
 from torchvision.transforms import v2
 
+from torchvision.transforms import functional as F
+
 
 # import RandomIoUCrop
 # transforms = RandomIoUCrop()
@@ -25,11 +27,11 @@ def tranform_image(img):
     if w == h:
         pass
     elif w > h:
-        transform = v2.Pad((0, int((w - h) / 2), 0, int((w - h) / 2)), padding_mode='edge')
-        img = transform(img)
+        #transform = v2.Pad((0, int((w - h) / 2), 0, int((w - h) / 2)), padding_mode='edge')
+        img = F.pad(img, (0, int((w - h) / 2), 0, int((w - h) / 2)), padding_mode='edge')
     else:
-        transform = v2.Pad((int((h - w) / 2), 0, int((h - w) / 2), 0), padding_mode='edge')
-        img = transform(img)
+        #transform = v2.Pad((int((h - w) / 2), 0, int((h - w) / 2), 0), padding_mode='edge')
+        img = F.pad(img, (int((h - w) / 2), 0, int((h - w) / 2), 0), padding_mode='edge')
 
     return img
 
