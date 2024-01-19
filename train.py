@@ -186,26 +186,26 @@ def main(
         unet = UNet2DConditionModel.from_pretrained(pretrained_model_path, subfolder="unet")
 
     # Load pretrained unet weights
-    print(f"unet_checkpoint_path: {unet_checkpoint_path}")
+    print(f"Motion unet_checkpoint_path: {unet_checkpoint_path}")
     if unet_checkpoint_path != "":
         zero_rank_print(f"from checkpoint: {unet_checkpoint_path}")
         unet_checkpoint_path = torch.load(unet_checkpoint_path, map_location="cpu")
         if "global_step" in unet_checkpoint_path: zero_rank_print(f"global_step: {unet_checkpoint_path['global_step']}")
         state_dict = unet_checkpoint_path["state_dict"] if "state_dict" in unet_checkpoint_path else unet_checkpoint_path
 
-        for k, v in state_dict.items():
-            if isinstance(v, torch.Tensor):
-                print(f"state_dict key: {k}, value:{v.shape}")
+        #for k, v in state_dict.items():
+        #    if isinstance(v, torch.Tensor):
+        #        print(f"state_dict key: {k}, value:{v.shape}")
 
         m, u = unet.load_state_dict(state_dict, strict=False)
-        zero_rank_print(f"missing keys: {len(m)}, unexpected keys: {len(u)}, total keys: {len(state_dict.keys())}")
+        zero_rank_print(f"Motion unet_checkpoint_path missing keys: {len(m)}, unexpected keys: {len(u)}, total keys: {len(state_dict.keys())}")
         #zero_rank_print(f"missing keys: {m}, unexpected keys: {u}")
-        if len(u) > 0:
-            import pprint
-            print(f"unexpected keys: ")
-            pprint.pprint(u)
-            print(f"missing keys: ")
-            pprint.pprint(m)
+        #if len(u) > 0:
+        #    import pprint
+        #    print(f"unexpected keys: ")
+        #    pprint.pprint(u)
+        #    print(f"missing keys: ")
+        #    pprint.pprint(m)
         assert len([x for x in u if 'motion_modules' not in x]) == 0
 
     # load dream booth
@@ -223,14 +223,14 @@ def main(
         # 1. vae
         converted_vae_checkpoint = convert_ldm_vae_checkpoint(dreambooth_state_dict, vae.config)
         m, u = vae.load_state_dict(converted_vae_checkpoint)
-        zero_rank_print(f"missing keys: {len(m)}, unexpected keys: {len(u)}, total keys: {len(converted_vae_checkpoint.keys())}")
+        zero_rank_print(f"dreambooth vae missing keys: {len(m)}, unexpected keys: {len(u)}, total keys: {len(converted_vae_checkpoint.keys())}")
         # 2. unet
         converted_unet_checkpoint = convert_ldm_unet_checkpoint(dreambooth_state_dict, unet.config)
         m,u = unet.load_state_dict(converted_unet_checkpoint, strict=False)
-        zero_rank_print(f"missing keys: {len(m)}, unexpected keys: {len(u)}, total keys: {len(converted_unet_checkpoint.keys())}")
+        zero_rank_print(f"dreambooth unet missing keys: {len(m)}, unexpected keys: {len(u)}, total keys: {len(converted_unet_checkpoint.keys())}")
         # 3. text_model
         text_encoder = convert_ldm_clip_checkpoint(dreambooth_state_dict)
-        zero_rank_print(f"newly loaded text_encoder: {text_encoder}")
+        zero_rank_print(f"dreambooth newly loaded text_encoder: {text_encoder}")
         del dreambooth_state_dict
 
     # Load image finetuned unet weights
@@ -245,7 +245,7 @@ def main(
 
 
         m, u = unet.load_state_dict({k[len('module.'):] if k.startswith('module.') else k:v for k,v in state_dict.items()}, strict=False)
-        zero_rank_print(f"missing keys: {len(m)}, unexpected keys: {len(u)}, total keys: {len(state_dict.keys())}")
+        zero_rank_print(f"image_finetuned_unet_checkpoint_path missing keys: {len(m)}, unexpected keys: {len(u)}, total keys: {len(state_dict.keys())}")
         # zero_rank_print(f"missing keys: {m}, unexpected keys: {u}")
         assert len(u) == 0
 
